@@ -1,10 +1,40 @@
+//Variaveis das moedas
+let USD = 5.67
+let EUR = 6.34
+let GBP = 7.55
+
+//Elementos do form
+const form = document.querySelector("form")
 const amount = document.getElementById("amount")
+const currency = document.getElementById("currency")
 
 
-// Manipulando o input para receber somente numeros 
+// Manipulando o input para receber somente numeros
 amount.addEventListener("input", () => {
     
     const hasCaractersRegex = /\D+/g
     amount.value = amount.value.replace(hasCaractersRegex, "")
     
 })
+
+// Captando o submit (enviar) do formulário
+form.onsubmit = (event) => {
+    event.preventDefault()
+
+    switch (currency.value){
+        case "USD":
+            convertCurrency(amount.value, USD, "US$")
+            break
+        case "EUR":
+            convertCurrency(amount.value, EUR, "€")
+            break
+        case "GBP":
+            convertCurrency(amount.value, GBP, "£")
+            break
+    }
+}
+
+//Função para converter a moeda
+function convertCurrency(amount, price, symbol){
+    console.log(amount, price, symbol)
+}
