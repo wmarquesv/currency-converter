@@ -43,13 +43,9 @@ function convertCurrency(amount, price, symbol){
         //atualiza a mensagem do valor das moedas
         description.textContent = `${symbol} 1 = ${formatCurrencyBRL(price)}`
 
-        //calcula o valor total /.replace(".",",") faz a troca de ponto para virgula porém tem que o transformar String no começo
-        let total = String(amount * price).replace(".",",")
-
-        //Para 100% de eficiência para que seja apenas numero
-        if(isNaN(total)){
-            return alert("Por favor, digite o valor corretamente para a conversão")
-        }
+        //calcula o valor total
+        let total = amount * price
+        total = formatCurrencyBRL(total).replace("R$", "")
 
         //exibe o resultado total
         result.textContent = `${total} REAIS` 
