@@ -8,6 +8,7 @@ const form = document.querySelector("form")
 const amount = document.getElementById("amount")
 const currency = document.getElementById("currency")
 const footer = document.querySelector("main footer")
+const description = document.getElementById("description")
 
 
 // Manipulando o input para receber somente numeros
@@ -38,6 +39,9 @@ form.onsubmit = (event) => {
 //Função para converter a moeda
 function convertCurrency(amount, price, symbol){
     try {
+        //atualiza a mensagem do valor das moedas
+        description.textContent = `${symbol} 1 = ${formatCurrency(price)}`
+        
         //classList.add = aplica classes já existentes no codigo css
         footer.classList.add("show-result")
     } catch (error) {
@@ -47,4 +51,11 @@ function convertCurrency(amount, price, symbol){
         alert("Não foi possível converter. Tente novamente mais tarde")
         console.log(error)
     }
+}
+
+function formatCurrency (value){
+    return Number(value).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+    })
 }
