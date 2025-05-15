@@ -9,6 +9,7 @@ const amount = document.getElementById("amount")
 const currency = document.getElementById("currency")
 const footer = document.querySelector("main footer")
 const description = document.getElementById("description")
+const result = document.getElementById("result")
 
 
 // Manipulando o input para receber somente numeros
@@ -40,7 +41,18 @@ form.onsubmit = (event) => {
 function convertCurrency(amount, price, symbol){
     try {
         //atualiza a mensagem do valor das moedas
-        description.textContent = `${symbol} 1 = ${formatCurrency(price)}`
+        description.textContent = `${symbol} 1 = ${formatCurrencyBRL(price)}`
+
+        //calcula o valor total /.replace(".",",") faz a troca de ponto para virgula porém tem que o transformar String no começo
+        let total = String(amount * price).replace(".",",")
+
+        //Para 100% de eficiência para que seja apenas numero
+        if(isNaN(total)){
+            return alert("Por favor, digite o valor corretamente para a conversão")
+        }
+
+        //exibe o resultado total
+        result.textContent = `${total} REAIS` 
         
         //classList.add = aplica classes já existentes no codigo css
         footer.classList.add("show-result")
@@ -53,7 +65,9 @@ function convertCurrency(amount, price, symbol){
     }
 }
 
-function formatCurrency (value){
+//Formatou o texto da mensagem de forma dinamica no footer
+function formatCurrencyBRL (value){
+    //Conversão para Number para poder 
     return Number(value).toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL",
